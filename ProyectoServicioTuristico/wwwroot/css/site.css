@@ -1,0 +1,438 @@
+﻿/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
+for details on configuring this project to bundle and minify static web assets. */
+
+a.navbar-brand {
+  white-space: normal;
+  text-align: center;
+  word-break: break-all;
+}
+
+/* Provide sufficient contrast against white background */
+a {
+  color: #0366d6;
+}
+
+.btn-primary {
+  color: #fff;
+  background-color: #1b6ec2;
+  border-color: #1861ac;
+}
+
+.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+  color: #fff;
+  background-color: #1b6ec2;
+  border-color: #1861ac;
+}
+
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+  font-size: 14px;
+}
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+.border-top {
+  border-top: 1px solid #e5e5e5;
+}
+.border-bottom {
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.box-shadow {
+  box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+}
+
+button.accept-policy {
+  font-size: 1rem;
+  line-height: inherit;
+}
+
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  /* Margin bottom by footer height */
+  margin-bottom: 60px;
+}
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  white-space: nowrap;
+  line-height: 60px; /* Vertically center the text there */
+}
+
+/*Estilos personalizados*/
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@1,700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Merriweather', serif;
+    text-decoration: none;
+}
+.pagina-quito {
+    background-image: url(dev-style/img/quito-bg.jpg);
+    background-color: rgba(72, 143, 235, 0.7);
+}
+.margintop5 {
+    margin-top: 5rem !important;
+}
+
+.boton-rectangular {
+    color: #318aac !important;
+    font-size: 20px;
+    font-weight: 500;
+    padding: 0.5em 1.2em;
+    background: rgba(0,0,0,0);
+    border-color: #318aac;
+    transition: all 1s ease;
+    position: relative;
+}
+    .boton-rectangular:hover {
+        background: #37a1cacc;
+        color: #fff !important;
+    }
+.letra-titulo {
+    font-size: 26px !important;
+}
+.letra-nav {
+    font-size: 17px !important;
+    padding-right: 5px !important;
+}
+.imagen-dentro {
+    width: 325px;
+    height: 225px;
+}
+.frase-azul{
+    font-size:40px;
+    color:aliceblue;
+    font-style:oblique;
+    font:bold;
+}
+
+
+/*Estilo de pagina*/
+#texto-imagen {
+    width: 35%;
+    height: 100vh;
+    background: rgba(40, 137, 247, 0.822);
+    background-attachment: fixed;
+    background-size: cover;
+    position: initial;
+}
+
+.imagen1 {
+    margin-top: 140px;
+    margin-bottom: 140px;
+    margin-right: 10px;
+    margin-left: 10px;
+    height: 25%;
+}
+
+#texto {
+    margin: 9vh 0;
+}
+/*seccion de contenido*/
+#texto-contenido1 {
+    width: 42%;
+}
+
+.imagen-seccion1 {
+    width: 100%;
+    height: 25vh;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    overflow: hidden;
+}
+
+#texto-contenido2 {
+    width: 35%;
+}
+
+.imagen-seccion2 {
+    width: 100%;
+    height: 25vh;
+    background: linear-gradient(rgba(26, 77, 47, 0.548),rgba(33, 240, 137, 0.5)),url(../img/seccion2.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    overflow: hidden;
+}
+/*seccion de servicios*/
+.servicio {
+    padding: 20px 25px 30px 25px;
+    margin-bottom: 25px;
+    width: 20rem;
+    margin-right: 20px;
+    margin-left: 20px;
+}
+
+    .servicio p {
+        margin-bottom: 40px;
+        height: 196px;
+    }
+
+#servicios .verde {
+    background: linear-gradient(rgba(81, 231, 93, 0.788),rgba(42, 223, 177, 0.747));
+    -webkit-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+    box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+}
+
+#servicios .turquesa {
+    background: linear-gradient(rgba(42, 223, 177, 0.747),rgba(81, 231, 93, 0.788));
+    -webkit-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+    box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.75);
+}
+
+.icono {
+    float: right;
+}
+/*seccion de clientes*/
+.imagen-seccion3 {
+    width: 100%;
+    height: 25vh;
+    background: linear-gradient(rgba(26, 77, 47, 0.548),rgba(33, 240, 137, 0.5)),url(../img/seccion3.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    overflow: hidden;
+}
+
+.texto-clientes {
+    line-height: 2.25rem;
+    display: flex;
+    height: 2.25rem;
+    width: 100%;
+    justify-content: center;
+    position: initial;
+    overflow: hidden;
+}
+
+    .texto-clientes ul {
+        animation: cambiar 7s infinite;
+    }
+
+@keyframes cambiar {
+    0% {
+        margin-top: 0;
+    }
+
+    20% {
+        margin-top: 0;
+    }
+
+    25% {
+        margin-top: -45px;
+    }
+
+    50% {
+        margin-top: -45px;
+    }
+
+    55% {
+        margin-top: -90px;
+    }
+
+    80% {
+        margin-top: -90px;
+    }
+
+    85% {
+        margin-top: -45px;
+    }
+
+    95% {
+        margin-top: -45px;
+    }
+
+    0% {
+        margin-top: 0;
+    }
+}
+/*seccion contactos*/
+.contacto {
+    width: 100%;
+    height: 273px;
+}
+
+@keyframes moverDerecha {
+    0% {
+        margin-right: 0;
+    }
+
+    20% {
+        margin-right: 0;
+    }
+
+    85% {
+        margin-right: -90%;
+    }
+
+    100% {
+        margin-right: -90%;
+    }
+}
+
+.parrafo-contacto {
+    position: relative;
+    top: 26px;
+    margin: 20px 0px 0px 37px;
+    width: 419px;
+    height: 227px;
+}
+
+    .parrafo-contacto::before {
+        position: absolute;
+        top: -10px;
+        left: 5px;
+        content: "";
+        width: 55%;
+        height: 3px;
+        background: white;
+    }
+
+    .parrafo-contacto::after {
+        position: absolute;
+        bottom: 52px;
+        right: 12px;
+        content: "";
+        width: 65%;
+        height: 3px;
+        background: white;
+    }
+
+.info {
+    position: relative;
+    top: 26px;
+    margin-left: 337px;
+    width: 400px;
+    height: 233px;
+    display: inline-block;
+}
+
+.ubicacion::before {
+    background-image: url(../img/locacion.png);
+    background-size: 38px 36px;
+    display: inline-block;
+    background-repeat: no-repeat;
+    width: 36px;
+    height: 35px;
+    content: "";
+}
+
+.email::before {
+    background-image: url(../img/email.png);
+    background-size: 38px 36px;
+    display: inline-block;
+    background-repeat: no-repeat;
+    width: 36px;
+    height: 35px;
+    content: "";
+}
+
+.codigo {
+    position: relative;
+    top: 43px;
+    margin: 0 0 10px 90px;
+    width: 248px;
+    height: 264px;
+    display: inline-block;
+}
+
+.code-qr {
+    background: white;
+    width: 230px;
+    height: 230px;
+}
+/*pagina contacto*/
+.barra-contacto {
+    background: linear-gradient(rgba(2, 5, 36, 0.548),rgba(26, 61, 218, 0.5)),url(../img/seccion1.jpg);
+    height: 100vh;
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    overflow: hidden;
+    position: relative;
+}
+
+.mapa-contacto-titulo {
+    width: 686px;
+    height: initial;
+    text-align: center;
+    margin-top: 7rem;
+    justify-content: center;
+    margin-left: 31rem;
+}
+
+.mapa-contacto {
+    background-image: url(../img/mapa.PNG);
+    width: 600px;
+    height: 450px;
+    margin-top: 2rem;
+    margin-left: 3rem;
+}
+
+#texto-contacto {
+    background: white;
+    width: 526px;
+    height: 450px;
+    margin-top: 2rem;
+    margin-left: 7rem;
+}
+
+.info-contacto {
+    position: relative;
+    top: 10px;
+    bottom: 10px;
+    display: inline-block;
+}
+
+    .info-contacto::after {
+        position: absolute;
+        bottom: -10px;
+        content: "";
+        width: 100%;
+        height: 3px;
+        background: orange;
+    }
+
+.datos-contacto {
+    position: relative;
+    top: 15px;
+    margin: 12px 0px 12px 18px;
+    width: 253px;
+    height: 264px;
+    display: inline-block;
+}
+
+.codigo-contacto {
+    position: relative;
+    top: 83px;
+    margin-left: 32px;
+    width: 201px;
+    height: 231px;
+    display: inline-block
+}
+
+.code-qr-contacto {
+    background: white;
+    width: 189px;
+    height: 192px;
+}
+
+
+/*Estilo de tailwids-antiguo*/

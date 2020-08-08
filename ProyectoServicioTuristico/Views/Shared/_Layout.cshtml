@@ -1,0 +1,100 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] -Servicio de guías-NómadasWeb</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <!-- Favicons -->
+    <link href="~/css/dev-style/img/icono-avion.png" rel="icon">
+    <link href="~/css/dev-style/img/icono-avion.png" rel="apple-touch-icon">
+    <!-- Libraries CSS Files -->
+    <link href="~/css/dev-style/lib/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="~/css/dev-style/lib/animate/animate.min.css" rel="stylesheet">
+    <link href="~/css/dev-style/lib/ionicons/css/ionicons.min.css" rel="stylesheet">
+    <link href="~/css/dev-style/lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+    <link href="~/css/dev-style/lib/lightbox/css/lightbox.min.css" rel="stylesheet">
+    <!-- Main Stylesheet File -->
+    <link href="~/css/dev-style/css/style.css" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3 fixed-top navbar-trans" id="mainNav">
+            <div class="container">
+                <a class="navbar-brand js-scroll text-info letra-titulo" asp-area="" asp-controller="Home" asp-action="Index">NómadasWeb</a>
+                <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarDefault" aria-controls="navbarDefault"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse justify-content-end" id="navbarDefault">
+                    <partial name="_LoginPartial" />
+                    <ul class="navbar-nav ">
+                        @if (SignInManager.IsSignedIn(User))
+                        {
+                            <!--Aqui lo que va a estar dentro del sistema-->
+                        }
+                        else
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link js-scroll text-info boton-rectangular letra-nav" asp-area="" asp-controller="Home" asp-action="Index">Inicio</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link js-scroll text-info boton-rectangular letra-nav" href="#mision">Misión</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link js-scroll text-info boton-rectangular letra-nav" href="#vision">Visión</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link js-scroll text-info boton-rectangular letra-nav" target="_blank" href="https://www.todaunavida.gob.ec/medidas-de-prevencion-frente-al-nuevo-coronavirus-covid-19-en-grupos-prioritarios/">Covid-19</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link js-scroll text-info boton-rectangular letra-nav" href="#contacto">Contacto</a>
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3 margintop5">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top text-muted">
+        <div class="container">
+            &copy; 2020 - Servicio Turístico-NómadasWeb - <!--<a asp-area="" asp-controller="Home" asp-action="Privacy">Privacidad</a>-->
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @RenderSection("Scripts", required: false)
+
+    <!-- JavaScript Libraries -->
+    <script src="~/css/dev-style/lib/jquery/jquery.min.js"></script>
+    <script src="~/css/dev-style/lib/jquery/jquery-migrate.min.js"></script>
+    <script src="~/css/dev-style/lib/popper/popper.min.js"></script>
+    <script src="~/css/dev-style/lib/bootstrap/js/bootstrap.min.js"></script>
+    <script src="~/css/dev-style/lib/easing/easing.min.js"></script>
+    <script src="~/css/dev-style/lib/counterup/jquery.waypoints.min.js"></script>
+    <script src="~/css/dev-style/lib/counterup/jquery.counterup.js"></script>
+    <script src="~/css/dev-style/lib/owlcarousel/owl.carousel.min.js"></script>
+    <script src="~/css/dev-style/lib/lightbox/js/lightbox.min.js"></script>
+    <script src="~/css/dev-style/lib/typed/typed.min.js"></script>
+    <!-- Contact Form JavaScript File -->
+    <script src="~/css/dev-style/contactform/contactform.js"></script>
+
+    <!-- Template Main Javascript File -->
+    <script src="~/css/dev-style/js/main.js"></script>
+    <!--Template de restrospect-->
+    <script src="~/css/restrospect-style/assets/js/skel.min.js"></script>
+    <script src="~/css/restrospect-style/assets/js/util.js"></script>
+    <script src="~/css/restrospect-style/assets/js/main.js"></script>
+</body>
+</html>
