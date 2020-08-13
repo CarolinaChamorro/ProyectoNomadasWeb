@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace ProyectoServicioTuristico.Models
 {
@@ -12,5 +13,7 @@ namespace ProyectoServicioTuristico.Models
         public Provincia Provincia { get; set; }
         public int IdCanton { get; set; }
         public Canton Canton { get; set; }
+        //listas de rutas
+        public List<Ruta> Ruta = new List<Ruta>();
     }
 }

@@ -20,7 +20,7 @@ namespace ProyectoServicioTuristico.Models
         //relacion idiomas
         public List<DetalleGuiaIidioma> DetalleGuiaIidioma= new List<DetalleGuiaIidioma>();
         //relacionruta
-        public List<DetalleGuiaRuta> DetalleGuiaRuta = new List<DetalleGuiaRuta>();
+        public List<Ruta> Ruta = new List<Ruta>();
         //fotoPerfil
         public string FotoPerfil { get; set; }
     }

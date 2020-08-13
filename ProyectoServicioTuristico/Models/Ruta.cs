@@ -15,7 +15,11 @@ namespace ProyectoServicioTuristico.Models
         public decimal Precio { get; set; }
         public string DescripcionServicios { get; set; }
         //Relacion con guia
-        public List<DetalleGuiaRuta> DetalleGuiaRuta = new List<DetalleGuiaRuta>();
+        public int IdGuia { get; set; }
+        public Guia Guia { get; set; }
+        //Clasificación Id
+        public int IdClasificacionRuta { get; set; }
+        public ClasificacionRuta ClasificacionRuta { get; set; }
         //relacion fotografia
         public List<DetalleRutaFoto> DetalleRutaFoto = new List<DetalleRutaFoto>();
     }
