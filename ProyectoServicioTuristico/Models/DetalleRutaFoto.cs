@@ -11,6 +11,7 @@ namespace ProyectoServicioTuristico.Models
     {
         [Key]
         public int DetalleRutaFotoId { get; set; }
+        //Key compuesta
         [ForeignKey("Ruta")]
         public int RutaId { get; set; }
         public Ruta Ruta { get; set; }

@@ -9,7 +9,7 @@ namespace ProyectoServicioTuristico.Models
         [Key]
         public int CantonId { get; set; }
         [Required(ErrorMessage = "Ingrese nombre del cantón")]
-        [Display(Name = "Nombre del cantón")]
+        [Display(Name = "Nombre del catón")]
         public string Nombre { get; set; }
         //IdProvincia/ClasificacionRuta
         [ForeignKey("Provincia")]

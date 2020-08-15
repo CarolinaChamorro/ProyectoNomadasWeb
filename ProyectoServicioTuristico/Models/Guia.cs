@@ -1,41 +1,36 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Security.Cryptography;
 
 namespace ProyectoServicioTuristico.Models
 {
     public class Guia
     {
+        //Investigar identity/AspNetUser
         [Key]
         public int GuiaId { get; set; }
-        [Required(ErrorMessage = "Ingrese su primer nombre")]
-        [Display(Name = "Primer nombre")]
+        [Required(ErrorMessage = "Ingrese su Primer Nombre")]
+        [Display(Name = "Primer Nombre")]
         public string PrimerNombre { get; set; }
-        [Display(Name = "Segundo nombre")]
+        [Display(Name = "Segundo Nombre")]
         public string SegundoNombre { get; set; }
-        [Required(ErrorMessage = "Ingrese su apellido paterno")]
-        [Display(Name = "Apellido paterno")]
+        [Required(ErrorMessage = "Ingrese su Apellido Paterno")]
+        [Display(Name = "Apellidos Paterno")]
         public string ApellidoPaterno { get; set; }
-        [Display(Name = "Apellido materno")]
+        [Display(Name = "Apellidos Materno")]
         public string  ApellidoMaterno { get; set; }
-        [Required(ErrorMessage = "Ingrese su edad")]
-        [Display(Name = "Edad")]
+        [Display(Name = "Nombres Completos")]
+        public string NombresCompletos => $"{PrimerNombre} {ApellidoPaterno}";
         public string Edad { get; set; }
-        [Required(ErrorMessage = "Ingrese su género")]
-        [Display(Name = "Sexo")]
         public int Sexo { get; set; }
-        [Display(Name = "Telefono")]
         public string Telefono { get; set; }
-        //fotoPerfil
-        [Required(ErrorMessage = "Ingrese su foto de perfil")]
-        [Display(Name = "Foto de perfil")]
+        [Required(ErrorMessage = "Ingresar su Foto Perfil")]
+        [Display(Name = "Foto de Perfil")]
         public string FotoPerfil { get; set; }
         //relacion idiomas
-        public List<DetalleGuiaIdioma> DetalleGuiaIdioma= new List<DetalleGuiaIdioma>();
+        public List<DetalleGuiaIidioma> DetalleGuiaIidioma= new List<DetalleGuiaIidioma>();
         //relacionruta
         public List<Ruta> Ruta = new List<Ruta>();
-       
     }
 }
