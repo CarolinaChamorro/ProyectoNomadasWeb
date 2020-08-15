@@ -1,0 +1,47 @@
+﻿@model IEnumerable<ProyectoServicioTuristico.Models.ClasificacionRuta>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Provincia)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Canton)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Provincia.ProvinciaId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Canton.Nombre)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.ClasificacionRutaId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.ClasificacionRutaId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.ClasificacionRutaId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

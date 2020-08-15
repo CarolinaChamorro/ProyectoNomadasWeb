@@ -6,7 +6,8 @@ namespace ProyectoServicioTuristico.Models
     public class Provincia
     {
         [Key]
-        public int IdProvincia { get; set; }
+        public int ProvinciaId { get; set; }
+        [Display(Name = "Provincia")]
         public string Nombre { get; set; }
         //ListCanton/ClasificacionRuta
         public List<Canton> Canton = new List<Canton>();

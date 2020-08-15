@@ -6,9 +6,10 @@ namespace ProyectoServicioTuristico.Models
     public class Idioma
     {
         [Key]
-        public int IdIdioma { get; set; }
+        public int IdiomaId { get; set; }
+        [Display(Name = "Idioma")]
         public string Nombre { get; set; }
         //guia
-        public List<DetalleGuiaIidioma> DetalleGuiaIidioma = new List<DetalleGuiaIidioma>();
+        public List<DetalleGuiaIdioma> DetalleGuiaIdioma = new List<DetalleGuiaIdioma>();
     }
 }

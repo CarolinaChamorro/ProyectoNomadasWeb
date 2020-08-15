@@ -9,7 +9,9 @@ namespace ProyectoServicioTuristico.Models
     public class Fotografia
     {
         [Key]
-        public int IdFotografia { get; set; }
+        public int FotografiaId { get; set; }
+        [Required(ErrorMessage = "Ingrese fotos")]
+        [Display(Name = "Fotos")]
         public string Fotos { get; set; }
         public List<DetalleRutaFoto> DetalleRutaFoto = new List<DetalleRutaFoto>();
     }
