@@ -13,7 +13,7 @@ namespace ProyectoServicioTuristico.Controllers
     public class RutasController : Controller
     {
         private readonly ApplicationDbContext _context;
-
+        private readonly Guia _guia;
         public RutasController(ApplicationDbContext context)
         {
             _context = context;
@@ -50,7 +50,7 @@ namespace ProyectoServicioTuristico.Controllers
         public IActionResult Create()
         {
             ViewData["ClasificacionRutaId"] = new SelectList(_context.ClasificacionRutas, "ClasificacionRutaId", "Nombre");
-            ViewData["GuiaId"] = new SelectList(_context.Guias, "GuiaId", "ApellidoPaterno");
+            ViewData["GuiaId"] = new SelectList(_context.Guias, "GuiaId", "Identidad");
             return View();
         }
 
@@ -59,17 +59,30 @@ namespace ProyectoServicioTuristico.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("RutaId,Nombre,PuntoPartida,PuntoLLegada,Precio,DescripcionServicios,GuiaId,ClasificacionRutaId")] Ruta ruta)
+        public async Task<IActionResult> Create( Ruta rutamodel)
         {
             if (ModelState.IsValid)
             {
+                var idguia = _guia.GuiaId;
+                Ruta ruta = new Ruta
+                {
+                    Nombre = rutamodel.Nombre,
+                    PuntoPartida=rutamodel.PuntoPartida,
+                    PuntoLLegada=rutamodel.PuntoLLegada,
+                    Precio=rutamodel.Precio,
+                    DescripcionServicios=rutamodel.DescripcionServicios,
+                    GuiaId=idguia,
+                    ClasificacionRutaId=rutamodel.ClasificacionRutaId
+                };
+                
+                
                 _context.Add(ruta);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ClasificacionRutaId"] = new SelectList(_context.ClasificacionRutas, "ClasificacionRutaId", "Nombre", ruta.ClasificacionRutaId);
-            ViewData["GuiaId"] = new SelectList(_context.Guias, "GuiaId", "ApellidoPaterno", ruta.GuiaId);
-            return View(ruta);
+            ViewData["ClasificacionRutaId"] = new SelectList(_context.ClasificacionRutas, "ClasificacionRutaId", "Nombre", rutamodel.ClasificacionRutaId);
+            //ViewData["GuiaId"] = new SelectList(_context.Guias, "GuiaId", "Identidad", rutamodel.GuiaId);
+            return View();
         }
 
         // GET: Rutas/Edit/5

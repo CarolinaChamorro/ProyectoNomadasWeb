@@ -20,6 +20,8 @@ namespace ProyectoServicioTuristico.Models
         public string ApellidoPaterno { get; set; }
         [Display(Name = "Apellido materno")]
         public string  ApellidoMaterno { get; set; }
+        [Display(Name = "Nombre completo")]
+        public string NombreCompleto{ get; set; }
         [Required(ErrorMessage = "Ingrese su edad")]
         [Display(Name = "Edad")]
         public string Edad { get; set; }
@@ -32,10 +34,14 @@ namespace ProyectoServicioTuristico.Models
         [Required(ErrorMessage = "Ingrese su foto de perfil")]
         [Display(Name = "Foto de perfil")]
         public string FotoPerfil { get; set; }
+        public string Identidad { get; set; }
         //relacion idiomas
         public List<DetalleGuiaIdioma> DetalleGuiaIdioma= new List<DetalleGuiaIdioma>();
         //relacionruta
         public List<Ruta> Ruta = new List<Ruta>();
-       
+        public Guia()
+        {
+            NombreCompleto = PrimerNombre + " " + ApellidoPaterno;
+        }
     }
 }

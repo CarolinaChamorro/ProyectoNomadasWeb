@@ -1,4 +1,4 @@
-﻿@model ProyectoServicioTuristico.Models.Guia
+﻿@model ProyectoServicioTuristico.ViewModels.GuiaViewModel
 
 @{
     ViewData["Title"] = "Create";
@@ -10,7 +10,7 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Create">
+        <form asp-action="Create" enctype="multipart/form-data" >
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="PrimerNombre" class="control-label"></label>
@@ -39,7 +39,11 @@
             </div>
             <div class="form-group">
                 <label asp-for="Sexo" class="control-label"></label>
-                <input asp-for="Sexo" class="form-control" />
+                <select asp-for="Sexo" class="form-control">
+                    <option value="">--Seleccionar un opción--</option>
+                    <option value="0">Femenino</option>
+                    <option value="1">Masculino</option>
+                </select>
                 <span asp-validation-for="Sexo" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -48,12 +52,15 @@
                 <span asp-validation-for="Telefono" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="FotoPerfil" class="control-label"></label>
-                <input asp-for="FotoPerfil" class="form-control" />
-                <span asp-validation-for="FotoPerfil" class="text-danger"></span>
+                <label asp-for="ArchivoImagen" class="control-label"></label>
+                <div class="custom-file">
+                    <input asp-for="ArchivoImagen" class="custom-file-input" id="customFile">
+                    <label class="custom-file-label" for="customFile">Sube tu foto</label>
+                </div>
+                <span asp-validation-for="ArchivoImagen" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Crear" class="btn btn-primary" />
             </div>
         </form>
     </div>
@@ -64,5 +71,11 @@
 </div>
 
 @section Scripts {
+    <script type="text/javascript">
+        $(".custom-file-input").on("change", function () {
+            var nombreArchivo = $(this).val().split("\\").pop();
+            $(this).siblings(".custom-file-label").addClass("selected").html(nombreArchivo);
+        });
+    </script>
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
