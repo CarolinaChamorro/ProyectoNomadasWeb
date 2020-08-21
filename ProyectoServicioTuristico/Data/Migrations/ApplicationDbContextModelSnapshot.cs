@@ -266,7 +266,7 @@ namespace ProyectoServicioTuristico.Data.Migrations
                     b.ToTable("ClasificacionRutas");
                 });
 
-            modelBuilder.Entity("ProyectoServicioTuristico.Models.DetalleGuiaIdioma", b =>
+            modelBuilder.Entity("ProyectoServicioTuristico.Models.DetalleGuiaIidioma", b =>
                 {
                     b.Property<int>("DetalleGuiaIdiomaId")
                         .ValueGeneratedOnAdd()
@@ -285,7 +285,7 @@ namespace ProyectoServicioTuristico.Data.Migrations
 
                     b.HasIndex("IdiomaId");
 
-                    b.ToTable("DetalleGuiaIdiomas");
+                    b.ToTable("DetalleGuiaIidiomas");
                 });
 
             modelBuilder.Entity("ProyectoServicioTuristico.Models.DetalleRutaFoto", b =>
@@ -341,7 +341,6 @@ namespace ProyectoServicioTuristico.Data.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Edad")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("FotoPerfil")
@@ -409,7 +408,7 @@ namespace ProyectoServicioTuristico.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("ClasificacionRutaId")
+                    b.Property<int>("ClasificacinRutaId")
                         .HasColumnType("int");
 
                     b.Property<string>("DescripcionServicios")
@@ -436,7 +435,7 @@ namespace ProyectoServicioTuristico.Data.Migrations
 
                     b.HasKey("RutaId");
 
-                    b.HasIndex("ClasificacionRutaId");
+                    b.HasIndex("ClasificacinRutaId");
 
                     b.HasIndex("GuiaId");
 
@@ -518,7 +517,7 @@ namespace ProyectoServicioTuristico.Data.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("ProyectoServicioTuristico.Models.DetalleGuiaIdioma", b =>
+            modelBuilder.Entity("ProyectoServicioTuristico.Models.DetalleGuiaIidioma", b =>
                 {
                     b.HasOne("ProyectoServicioTuristico.Models.Guia", "Guia")
                         .WithMany()
@@ -552,7 +551,7 @@ namespace ProyectoServicioTuristico.Data.Migrations
                 {
                     b.HasOne("ProyectoServicioTuristico.Models.ClasificacionRuta", "ClasificacionRuta")
                         .WithMany()
-                        .HasForeignKey("ClasificacionRutaId")
+                        .HasForeignKey("ClasificacinRutaId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

@@ -7,9 +7,8 @@ namespace ProyectoServicioTuristico.Models
     {
         [Key]
         public int IdiomaId { get; set; }
-        [Display(Name = "Idioma")]
         public string Nombre { get; set; }
         //guia
-        public List<DetalleGuiaIdioma> DetalleGuiaIdioma = new List<DetalleGuiaIdioma>();
+        public List<DetalleGuiaIidioma> DetalleGuiaIidioma = new List<DetalleGuiaIidioma>();
     }
 }
