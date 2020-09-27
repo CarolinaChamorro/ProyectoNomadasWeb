@@ -7,11 +7,12 @@ namespace ProyectoServicioTuristico.Models
     {
         [Key]
         public int ProvinciaId { get; set; }
+        [Required(ErrorMessage = "Ingrese la provincia")]
         [Display(Name = "Provincia")]
         public string Nombre { get; set; }
         //ListCanton/ClasificacionRuta
         public List<Canton> Canton = new List<Canton>();
-        public List<ClasificacionRuta> ClasificacionRuta = new List<ClasificacionRuta>();
+        public List<ClasificacionRuta> ClasificacionRutas = new List<ClasificacionRuta>();
 
     }
 }

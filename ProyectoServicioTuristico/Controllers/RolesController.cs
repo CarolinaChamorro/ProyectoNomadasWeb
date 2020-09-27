@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace ProyectoServicioTuristico.Controllers
 {
-    //[Authorize(Roles ="Administrador,Usuario")]
+    [Authorize(Roles="Administrador")]
     public class RolesController : Controller
     {
         private RoleManager<IdentityRole> roleManager;
@@ -20,10 +20,11 @@ namespace ProyectoServicioTuristico.Controllers
             this.roleManager = roleManager;
             this.userManager = userMgr;
         }
+
         public ViewResult Index() => View(roleManager.Roles);
+
+        //[Authorize(Roles = "Administrador")]
         public IActionResult Create() => View();
-        [Authorize(Roles = "Administrador")]
-        [Authorize]
         [HttpPost]
         public async Task<IActionResult> Create([Required] string nombre)
         {

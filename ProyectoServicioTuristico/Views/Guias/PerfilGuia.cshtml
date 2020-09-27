@@ -1,0 +1,217 @@
+@model ProyectoServicioTuristico.Models.Guia
+
+@{ ViewBag.Title = "PerfilGuia";
+                Layout = "_Layout"; }
+
+<h2 class="text-black-50 text-center">Perfil de @Model.NombreCompleto</h2>
+<hr />
+
+<a asp-action="Index" class="btn btn-outline-secondary mb-2">Regresar</a>
+
+<br />
+<div>
+    <div class="card">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-4">
+                    <div class="thumbnail" style="align-content: center">
+                        <a href="~/images/guias/@Model.FotoPerfil">
+                            <img src="~/images/guias/@Model.FotoPerfil" alt="imagen no encntrada" height="200" width="200" class="rounded-circle" asp-append-version="true" />
+                        </a>
+                    </div>
+                    <br /><br />
+                    <h4 class="text-info">@Html.DisplayFor(model => model.NombreCompleto)</h4>
+                </div>
+                <div class="col-8">
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="col-sm-4 text-primary">
+                                @Html.DisplayNameFor(model => model.NombreCompleto)
+                            </div>
+                            <div class="col-sm-10">
+                                @Html.DisplayFor(model => model.NombreCompleto)
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="col-sm-4 text-primary">
+                                @Html.DisplayNameFor(model => model.Edad)
+                            </div>
+                            <div class="col-sm-10">
+                                @Html.DisplayFor(model => model.Edad)
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="col-sm-4 text-primary mt-2">
+                                @Html.DisplayNameFor(model => model.Sexo)
+                            </div>
+                            @if (Model.Sexo == 0)
+                            {
+                                <div class="col-sm-10">Femenino</div>
+                            }
+                            @if (Model.Sexo == 1)
+                            {
+                                <div class="col-sm-10">Masculino</div>
+                            }
+                        </div>
+                        <div class="col-6">
+                            <div class="col-sm-4 text-primary">
+                                @Html.DisplayNameFor(model => model.Identidad)
+                            </div>
+                            <div class="col-sm-10">
+                                @Html.DisplayFor(model => model.Identidad)
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="col-sm-12 text-primary mt-2">
+                                Contactos:
+                            </div>
+                            <div class="col-sm-4 text-primary">
+                                @Html.DisplayNameFor(model => model.Telefono)
+                            </div>
+                            <div class="col-sm-10">
+                                @Html.DisplayFor(model => model.Telefono)
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="col-sm-8 text-primary ">
+                                Idiomas
+                            </div>
+                            <div class="col-sm-8">
+                                <div class="row">
+                                    @{
+                                        foreach (var idiomas in Model.DetalleGuiaIdiomas)
+                                        {
+                                            <div class="col-sm-8">
+                                                <ul>
+                                                    @idiomas.Idioma.Nombre
+                                                </ul>
+                                            </div>
+                                        }
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<br />
+<hr />
+<div class="container">
+    <button type="button" class="btn btn-secondary" data-toggle="collapse" data-target="#bookPhotos">Galeria</button>
+    <br /> <br />
+    <div id="bookPhotos" class="collapse">
+        <div class="card">
+            <div class="card-header">
+                <h4>Galeria de @Model.NombreCompleto</h4>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <br /><br />
+                    @if (Model.FotografiaGuias != null)
+                    {
+                        @foreach (var item in Model.FotografiaGuias)
+                        {
+                            <div class="col-md-4">
+                                <div class="thumbnail">
+                                    <a href="~/images/guias/book/@item.Fotos">
+                                        <img src="~/images/guias/book/@item.Fotos" alt="Imagen no encontrada" height="300" width="300">
+                                        <div class="caption">
+                                            <div class="col-sm-10">
+                                                @Html.DisplayFor(modelItem => item.DescripcionFoto)
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        }
+                    }
+                    else
+                    {
+                        <h6>
+                            No hay imagenes en la galeria
+                        </h6>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<hr />
+<br />
+<div>
+    @if (Model.Rutas != null)
+    {
+        @foreach (var item in Model.Rutas)
+        {
+            <div class="card">
+                <div class="card-header">
+                    <h5>@Html.DisplayFor(modelItem => item.ClasificacionRuta.Nombre)</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="col-sm-12">
+                                @Html.DisplayFor(modelItem => item.Nombre)
+                            </div>
+                            <div class="col-sm-4">
+                                @Html.DisplayNameFor(modelItem => item.PuntoPartida)
+                            </div>
+                            <div class="col-sm-10">
+                                @Html.DisplayFor(modelItem => item.PuntoPartida)
+                            </div>
+                            <div class="col-sm-4">
+                                @Html.DisplayNameFor(modelItem => item.PuntoLLegada)
+                            </div>
+                            <div class="col-sm-10">
+                                @Html.DisplayFor(modelItem => item.PuntoLLegada)
+                            </div>
+                            <div class="col-sm-4">
+                                @Html.DisplayNameFor(modelItem => item.DescripcionServicios)
+                            </div>
+                            <div class="col-sm-10">
+                                @Html.DisplayFor(modelItem => item.DescripcionServicios)
+                            </div>
+                            <div class="col-sm-10 mb-4">Precio de la ruta: <span class="badge badge-info">$ @item.Precio</span></div>
+                            <div class="row">
+                                @if (item.FotografiaRutas != null)
+                                {
+                                    @foreach (var photo in item.FotografiaRutas)
+                                    {
+                                        <div class="col-md-4">
+                                            <div class="thumbnail">
+                                                <a href="~/images/rutas/@photo.Fotos">
+                                                    <img src="~/images/rutas/@photo.Fotos" alt="@photo.Ruta.Nombre" height="300" width="300">
+                                                    <div class="caption">
+                                                        <div class="col-sm-10 mt-2 mb-2">
+                                                            @Html.DisplayFor(modelItem => photo.DescripcionFoto)
+                                                        </div>
+                                                    </div>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    }
+                                    <br />
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        } }
+                    else
+                    {
+        <p>
+            @Model.NombreCompleto no ha creado servicios aun
+        </p>}
+</div>
+

@@ -1,0 +1,60 @@
+﻿@model IEnumerable<ProyectoServicioTuristico.Models.ClasificacionRuta>
+
+@{ ViewData["Title"] = "Index"; }
+
+<h1 class="text-black text-center">Clasificación de rutas</h1>
+<div class="text-center mt-3 mb-3">
+    <a asp-controller="Roles" asp-action="Index" class="btn btn-outline-primary mr-2">Regresar</a>
+    <a asp-controller="Provincias" asp-action="Index" class="btn btn-secondary mr-2">Agregar más provincias</a>
+    <a asp-controller="Cantones" asp-action="Index" class="btn btn-secondary ml-2">Agregar más cantones</a>
+    <a asp-action="Create" class="btn btn-outline-primary ml-2">Crear nueva clasificación</a>
+</div>
+        <table class="table table-hover table-responsive-lg">
+            <thead class="thead-dark">
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Nombre)
+
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Descripcion)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Provincia)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Canton)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+    <tr>
+        <td>
+            <img src="~/images/clasificaciones/@item.Foto"
+                 class="rounded-circle"
+                 height="60" width="60"
+                 asp-append-version="true" />
+            @Html.DisplayFor(modelItem => item.Nombre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Descripcion)
+
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Provincia.Nombre)
+        </td>
+
+        <td>
+            @Html.DisplayFor(modelItem => item.Canton.Nombre)
+        </td>
+        <td>
+            <a asp-controller="ClasificacionRutas" asp-action="Edit" asp-route-id="@item.ClasificacionRutaId" class="btn btn-primary ">Editar</a> 
+            <a asp-controller="ClasificacionRutas" asp-action="Delete" asp-route-id="@item.ClasificacionRutaId"class="btn btn-danger ">Eliminar</a>
+        </td>
+    </tr>
+}
+            </tbody>
+        </table>

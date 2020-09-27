@@ -11,6 +11,11 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
+using ProyectoServicioTuristico.Models;
+using ProyectoServicioTuristico.Data;
+using Microsoft.EntityFrameworkCore;
+using ProyectoServicioTuristico.TagHelpers;
+using EO.Internal;
 
 namespace ProyectoServicioTuristico.Areas.Identity.Pages.Account
 {
@@ -20,14 +25,15 @@ namespace ProyectoServicioTuristico.Areas.Identity.Pages.Account
         private readonly UserManager<IdentityUser> _userManager;
         private readonly SignInManager<IdentityUser> _signInManager;
         private readonly ILogger<LoginModel> _logger;
-
+        private readonly ApplicationDbContext _context;
         public LoginModel(SignInManager<IdentityUser> signInManager, 
             ILogger<LoginModel> logger,
-            UserManager<IdentityUser> userManager)
+            UserManager<IdentityUser> userManager,ApplicationDbContext context)
         {
-            _userManager = userManager;
             _signInManager = signInManager;
             _logger = logger;
+            _context = context;
+            _userManager = userManager;
         }
 
         [BindProperty]
@@ -75,8 +81,6 @@ namespace ProyectoServicioTuristico.Areas.Identity.Pages.Account
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
-            returnUrl = returnUrl ?? Url.Content("~/");
-
             if (ModelState.IsValid)
             {
                 // This doesn't count login failures towards account lockout
@@ -84,8 +88,20 @@ namespace ProyectoServicioTuristico.Areas.Identity.Pages.Account
                 var result = await _signInManager.PasswordSignInAsync(Input.Email, Input.Password, Input.RememberMe, lockoutOnFailure: false);
                 if (result.Succeeded)
                 {
-                    _logger.LogInformation("El usuario se ha registrado.");
-                    return LocalRedirect(returnUrl);
+                    var usuario = await _context.Users.FirstOrDefaultAsync(a => a.Email == Input.Email);
+                    var guia = await _context.Guias.FirstOrDefaultAsync(m => m.Identidad == Input.Email);
+                     if (guia !=null && guia.Identidad==Input.Email)
+                    {
+                        _logger.LogInformation("El usuario guia se ha registrado.");
+                        var urlIndex = returnUrl ?? Url.Content($"~/Guias/Details/{guia.GuiaId}");
+                        return LocalRedirect(urlIndex);
+                    }else if(usuario!=null && guia==null)
+                    {
+                        _logger.LogInformation("El usuario se ha registrado.");
+                        var urlCreate = returnUrl ?? Url.Content("~/Guias/Create");
+                        return LocalRedirect(urlCreate);
+
+                    }
                 }
                 if (result.RequiresTwoFactor)
                 {
@@ -106,5 +122,6 @@ namespace ProyectoServicioTuristico.Areas.Identity.Pages.Account
             // If we got this far, something failed, redisplay form
             return Page();
         }
+       
     }
 }

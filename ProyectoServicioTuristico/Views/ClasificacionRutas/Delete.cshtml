@@ -4,36 +4,64 @@
     ViewData["Title"] = "Delete";
 }
 
-<h1>Delete</h1>
 
-<h3>Are you sure you want to delete this?</h3>
-<div>
-    <h4>ClasificacionRuta</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Nombre)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Nombre)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Provincia)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Provincia.ProvinciaId)
-        </dd class>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Canton)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Canton.Nombre)
-        </dd class>
-    </dl>
-    
-    <form asp-action="Delete">
-        <input type="hidden" asp-for="ClasificacionRutaId" />
-        <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-action="Index">Back to List</a>
-    </form>
-</div>
+<div class="col-md-8 mx-auto py-4">
+    <div class="card">
+        <div class="card-header text-center">
+            <h3 class="text-black text-center text-danger">¿Estás seguro que quieres eliminar este registro?</h3>
+        </div>
+        <hr />
+        <div class="card-body">
+            <div class="row">
+                <div class="col-6">
+                    <div class="col-sm-6 text-primary">
+                        @Html.DisplayNameFor(model => model.Nombre)
+                    </div>
+                    <div class="col-sm-8">
+                        @Html.DisplayFor(model => model.Nombre)
+                    </div>
+                </div>
+
+                <div class="col-6">
+                    <div class="col-sm-10 text-primary">
+                        @Html.DisplayNameFor(model => model.Descripcion)
+                    </div>
+                    <div class="col-sm-10">
+                        @Html.DisplayFor(model => model.Descripcion)
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <div class="col-sm-10 text-primary">
+                        @Html.DisplayNameFor(model => model.Provincia)
+                    </div>
+                    <div class="col-sm-10">
+                        @Html.DisplayFor(model => model.Provincia.Nombre)
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="col-sm-10 text-primary">
+                        Cantón
+                    </div>
+                    <div class="col-sm-10">
+                        @Html.DisplayFor(model => model.Canton.Nombre)
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <img src="@("~/images/clasificaciones/"+Model.Foto)"
+                     class="rounded-circle"
+                     height="60" width="60"
+                     asp-append-version="true" />
+            </div>
+            <div class="text-center">
+                <form asp-action="Delete">
+                    <input type="hidden" asp-for="ClasificacionRutaId" />
+                    <a asp-action="Lista" class="btn btn-danger mr-2">Regresar</a>
+                    <input type="submit" value="Eliminar" class="btn btn-danger ml-2" />
+                </form>
+            </div>
+        </div>
+    </div>
+</div> 

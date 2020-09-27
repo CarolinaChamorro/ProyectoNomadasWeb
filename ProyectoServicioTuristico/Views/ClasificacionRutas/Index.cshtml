@@ -1,47 +1,39 @@
-﻿@model IEnumerable<ProyectoServicioTuristico.Models.ClasificacionRuta>
+﻿@model List<ClasificacionRuta>
 
-@{
-    ViewData["Title"] = "Index";
-}
+@{ ViewData["Title"] = "Clasificacion de Rutas"; }
 
-<h1>Index</h1>
+<h1 class="text-black text-center mb-3">Clasificaciones de rutas por tópicos</h1>
 
-<p>
+<!--p>
     <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Nombre)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Provincia)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Canton)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Nombre)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Provincia.ProvinciaId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Canton.Nombre)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.ClasificacionRutaId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.ClasificacionRutaId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.ClasificacionRutaId">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+</!--p-->
+<div class="row">
+    @foreach (var item in Model)
+    {
+
+<div class="col-md-6">
+    <div class="card">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-sm-4">
+                    <a href="#">
+                        <img src="~/images/clasificaciones/@item.Foto" alt="@item.Nombre" height="100" width="100" />
+                    </a>
+                </div>
+                <div class="col-sm-8">
+                    <div class="card-title text-info">@item.Nombre</div>
+                    <div class="card-text">@item.Descripcion</div>
+                    <div class="card-text">@item.Provincia.Nombre - @item.Canton.Nombre</div>
+                    <div class="card-text">Existen @item.Rutas.Count rutas</div>
+                </div>
+            </div>
+        </div>
+        <div class="card-footer bg-info">
+            <a asp-action="Details" asp-route-id="@item.ClasificacionRutaId" class="text-black">Ver información</a>
+        </div>
+    </div>
+    <br /><br />
+</div>}
+</div>
+
+

@@ -1,44 +1,86 @@
-﻿@model ProyectoServicioTuristico.Models.ClasificacionRuta
+﻿@model ProyectoServicioTuristico.ViewModels.EditClasificacionViewModel
 
 @{
     ViewData["Title"] = "Edit";
 }
 
-<h1>Edit</h1>
-
-<h4>ClasificacionRuta</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="ClasificacionRutaId" />
-            <div class="form-group">
-                <label asp-for="Nombre" class="control-label"></label>
-                <input asp-for="Nombre" class="form-control" />
-                <span asp-validation-for="Nombre" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ProvinciaId" class="control-label"></label>
-                <select asp-for="ProvinciaId" class="form-control" asp-items="ViewBag.ProvinciaId"></select>
-                <span asp-validation-for="ProvinciaId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="CantonId" class="control-label"></label>
-                <select asp-for="CantonId" class="form-control" asp-items="ViewBag.CantonId"></select>
-                <span asp-validation-for="CantonId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
-        </form>
+<div class="col-md-10 mx-auto py-4">
+    <div class="card">
+        <div class="card-header bg-primary text-uppercase text-center">
+            <h4 class="text-white">Editar clasificación </h4>
+        </div>
+        <div class="card-body">
+            <form asp-action="Edit" enctype="multipart/form-data">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="ClasificacionRutaId" />
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="Nombre" class="control-label text-primary"></label>
+                            <input asp-for="Nombre" class="form-control" />
+                            <span asp-validation-for="Nombre" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="Descripcion" class="control-label text-primary"></label>
+                            <input asp-for="Descripcion" class="form-control" />
+                            <span asp-validation-for="Descripcion" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label text-primary">Provincia</label>
+                            <select asp-for="ProvinciaId" class="form-control" asp-items="ViewBag.ProvinciaId"></select>
+                            <span asp-validation-for="ProvinciaId" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label class="control-label text-primary">Cantón</label>
+                            <select asp-for="CantonId" class="form-control" asp-items="ViewBag.CantonId"></select>
+                            <span asp-validation-for="CantonId" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label asp-for="ArchivoFoto" class="control-label text-primary"></label>
+                            <div class="custom-file">
+                                <input asp-for="ArchivoFoto" class="custom-file-input" id="customFile">
+                                <label class="custom-file-label" for="customFile">Haz click aqui para cambiar la foto</label>
+                            </div>
+                            <span asp-validation-for="ArchivoFoto" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group row col-sm-4 offset-4">
+                            <img src="@("~/images/clasificaciones/"+Model.ExistingPhotoPath)"
+                                 class="rounded-circle"
+                                 height="80" width="80"
+                                 asp-append-version="true" />
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group text-center">
+                    <a asp-action="Lista" class="btn btn-outline-primary mr-2">Regresar</a>
+                    <input type="submit" value="Guardar" class="btn btn-primary ml-2" />
+                </div>
+            </form>
+        </div>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
 
 @section Scripts {
+    <script type="text/javascript">
+        $(".custom-file-input").on("change", function () {
+            var nombreArchivo = $(this).val().split("\\").pop();
+            $(this).siblings(".custom-file-label").addClass("selected").html(nombreArchivo);
+        });
+    </script>
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }

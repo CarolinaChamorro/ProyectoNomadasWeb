@@ -1,9 +1,15 @@
 ﻿@using Microsoft.AspNetCore.Identity;
 @model IEnumerable<IdentityRole>
 
-<h1>Todos los roles</h1>
-<a asp-action="Create" class="btn btn-secondary">Crear rol</a>
-<table class="table table-sm table-bordered">
+<h1 class="text-danger text-center display-4">Administrador</h1>
+<h6 class="text-primary mb-2">Acceso a información de guias, clasificación de rutas e idiomas</h6>
+<a asp-controller="Guias" asp-action="Index" class="btn btn-outline-info">Usuarios guias</a>
+<a asp-controller="ClasificacionRutas" asp-action="Lista" class="btn btn-outline-secondary">Clasificación de rutas</a>
+<a asp-controller="Idiomas" asp-action="Index" class="btn btn-outline-info">Idiomas</a>
+<h4 class="text-center">Asignar a los usuarios un rol</h4>
+<!--Por el momento solo tenemos 2 roles. Implementar más adelante-->
+@*<a asp-action="Create" class="btn btn-secondary">Crear rol</a>*@
+<table class="table table-responsive-sm table-dark">
     <tr>
         <th>Id</th>
         <th>Nombre</th>
@@ -13,16 +19,16 @@
     </tr>
     @foreach (var rol in Model)
     {
-        <tr>
-            <td>@rol.Id</td>
-            <td>@rol.Name</td>
-            <td i-role="@rol.Id"></td>
-            <td><a class="btn btn-primary" asp-action="Update" asp-route-id="@rol.Id">Actualizar</a></td>
-            <td>
-                <form asp-action="Delete" method="post" asp-route-id="@rol.Id">
-                    <input type="submit" value="Borrar" class="btn btn-danger" />
-                </form>
-            </td>
-        </tr>
-    }
+<tr>
+    <td>@rol.Id</td>
+    <td>@rol.Name</td>
+    <td i-role="@rol.Id"></td>
+    <td><a class="btn btn-primary align-content-center" asp-action="Update" asp-route-id="@rol.Id">Actualizar</a></td>
+    <td>
+        <form asp-action="Delete" method="post" asp-route-id="@rol.Id">
+            <input type="submit" value="Borrar" class="btn btn-danger align-content-center" />
+        </form>
+    </td>
+</tr>}
 </table>
+

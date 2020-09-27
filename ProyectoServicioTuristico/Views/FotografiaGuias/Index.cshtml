@@ -1,0 +1,49 @@
+﻿@model IEnumerable<ProyectoServicioTuristico.Models.FotografiaGuia>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Guia)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Fotos)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DescripcionFoto)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Guia.Identidad)
+            </td>
+            <td>
+                <img src="~/images/guias/book/@item.Fotos"
+                     class="rounded-circle"
+                     height="80" width="80"
+                     asp-append-version="true" />
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DescripcionFoto)
+            </td>
+            <td>
+                <a asp-action="Details" asp-route-id="@item.FotografiaId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.FotografiaId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

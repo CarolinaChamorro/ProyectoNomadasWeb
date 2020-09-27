@@ -4,86 +4,137 @@
     ViewData["Title"] = "Delete";
 }
 
-<h1>Delete</h1>
+<div class="col-md-8 mx-auto py-4">
+    <div class="card">
+        <div class="card-header text-center">
+            <h3 class="text-black text-center text-danger">¿Estás seguro que quieres eliminar este registro?</h3>
+        </div>
+        <hr />
+        <div class="card-body">
+            <div class="row">
+                <div class="col-6">
+                    <div class="col-sm-8 text-primary">
+                        @Html.DisplayNameFor(model => model.PrimerNombre)
+                    </div>
+                    <div class="col-sm-8">
+                        @Html.DisplayFor(model => model.PrimerNombre)
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="col-sm-8 text-primary">
+                        @Html.DisplayNameFor(model => model.SegundoNombre)
+                    </div>
+                    <div class="col-sm-8">
+                        @Html.DisplayFor(model => model.SegundoNombre)
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <div class="col-sm-8 text-primary">
+                        @Html.DisplayNameFor(model => model.ApellidoPaterno)
+                    </div>
+                    <div class="col-sm-8">
+                        @Html.DisplayFor(model => model.ApellidoPaterno)
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="col-sm-8 text-primary">
+                        @Html.DisplayNameFor(model => model.ApellidoMaterno)
+                    </div>
+                    <div class="col-sm-8">
+                        @Html.DisplayFor(model => model.ApellidoMaterno)
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <div class="col-sm-8 text-primary">
+                        @Html.DisplayNameFor(model => model.NombreCompleto)
+                    </div>
+                    <div class="col-sm-8">
+                        @Html.DisplayFor(model => model.NombreCompleto)
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="col-sm-8 text-primary">
+                        @Html.DisplayNameFor(model => model.Edad)
+                    </div>
+                    <div class="col-sm-8">
+                        @Html.DisplayFor(model => model.Edad)
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <div class="col-sm-8 text-primary">
+                        @Html.DisplayNameFor(model => model.Sexo)
+                    </div>
+                    @if (Model.Sexo == 0)
+                    {
+                        <div class="col-sm-8">Femenino</div>
+                    }
+                    @if (Model.Sexo == 1)
+                    {
+                        <div class="col-sm-8">Masculino</div>
+                    }
+                </div>
+                <div class="col-6">
+                    <div class="col-sm-8 text-primary">
+                        @Html.DisplayNameFor(model => model.Telefono)
+                    </div>
+                    <div class="col-sm-8">
+                        @Html.DisplayFor(model => model.Telefono)
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <div class="col-sm-8 text-primary">
+                        @Html.DisplayNameFor(model => model.FotoPerfil)
+                    </div>
+                    <div class="col-sm-8">
+                        <img src="@("~/images/guias/"+Model.FotoPerfil)"
+                             class="rounded-circle"
+                             height="80" width="80"
+                             asp-append-version="true" />
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="col-sm-8 text-primary">
+                        @Html.DisplayNameFor(model => model.Identidad)
+                    </div>
+                    <div class="col-sm-8">
+                        @Html.DisplayFor(model => model.Identidad)
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <div class="col-sm-8 text-primary ">
+                        Idiomas
+                    </div>
+                    <div class="col-sm-8">
+                        @{
+                            foreach (var idioma in Model.DetalleGuiaIdiomas)
+                            {
 
-<h3>Are you sure you want to delete this?</h3>
-<div>
-    <h4>Guia</h4>
-    <hr />
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.PrimerNombre)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.PrimerNombre)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.SegundoNombre)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.SegundoNombre)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.ApellidoPaterno)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.ApellidoPaterno)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.ApellidoMaterno)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.ApellidoMaterno)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.NombreCompleto)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.NombreCompleto)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Edad)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Edad)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Sexo)
-        </dt>
-        @if (Model.Sexo == 0)
-        {
-            <dd>Femenino</dd>
-        }
-        @if (Model.Sexo == 1)
-        {
-            <dd>Masculino</dd>
-        }
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Telefono)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Telefono)
-        </dd>
-        <dt class="col-sm-2">
-            <img src="@("~/images/guias/"+Model.FotoPerfil)"
-                 class="rounded-circle"
-                 height="60" width="70"
-                 asp-append-version="true" />
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.FotoPerfil)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Identidad)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Identidad)
-        </dd>
-    </dl>
-    
-    <form asp-action="Delete">
-        <input type="hidden" asp-for="GuiaId" />
-        <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-action="Index">Back to List</a>
-    </form>
+                                <ul>
+                                    @idioma.Idioma.Nombre
+                                </ul>
+
+                            }
+                        }
+                    </div>
+                </div>
+            </div>
+            <div class="text-center">
+                <form asp-action="Delete">
+                    <input type="hidden" asp-for="GuiaId" />
+                    <a asp-action="Index" class="btn btn-outline-primary mr-2">Regresar</a>
+                    <input type="submit" value="Eliminar" class="btn btn-danger ml-2" />
+                </form>
+            </div>
+        </div>
+    </div>
 </div>

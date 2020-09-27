@@ -1,38 +1,48 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Security.Cryptography;
 
 namespace ProyectoServicioTuristico.Models
 {
     public class Guia
     {
-        //Investigar identity/AspNetUser
         [Key]
         public int GuiaId { get; set; }
-        [Required(ErrorMessage = "Ingrese su Primer Nombre")]
-        [Display(Name = "Primer Nombre")]
+        [Required(ErrorMessage = "Ingrese su primer nombre")]
+        [Display(Name = "Primer nombre")]
         public string PrimerNombre { get; set; }
-        [Display(Name = "Segundo Nombre")]
+        [Display(Name = "Segundo nombre")]
         public string SegundoNombre { get; set; }
-        [Required(ErrorMessage = "Ingrese su Apellido Paterno")]
-        [Display(Name = "Apellidos Paterno")]
+        [Required(ErrorMessage = "Ingrese su apellido paterno")]
+        [Display(Name = "Apellido paterno")]
         public string ApellidoPaterno { get; set; }
-        [Display(Name = "Apellidos Materno")]
+        [Display(Name = "Apellido materno")]
         public string  ApellidoMaterno { get; set; }
+        [Display(Name = "Nombre completo")]
+        public string NombreCompleto{ get; set; }
         [Required(ErrorMessage = "Ingrese su edad")]
         [Display(Name = "Edad")]
         public string Edad { get; set; }
+        [Required(ErrorMessage = "Ingrese su género")]
+        [Display(Name = "Sexo")]
         public int Sexo { get; set; }
+        [Display(Name = "Telefono")]
         public string Telefono { get; set; }
-        [Required(ErrorMessage = "Ingresar su Foto Perfil")]
-        [Display(Name = "Foto de Perfil")]
+        //fotoPerfil
+        [Required(ErrorMessage = "Ingrese su foto de perfil")]
+        [Display(Name = "Foto de perfil")]
         public string FotoPerfil { get; set; }
         public string Identidad { get; set; }
         //relacion idiomas
-        public List<DetalleGuiaIidioma> DetalleGuiaIidioma= new List<DetalleGuiaIidioma>();
+        public ICollection<DetalleGuiaIdioma> DetalleGuiaIdiomas { get; set; }
         //relacionruta
-        public List<Ruta> Ruta = new List<Ruta>();
-       
+        public ICollection<Ruta> Rutas { get; set; }
+        public ICollection<FotografiaGuia> FotografiaGuias { get; set; }
+        public Guia()
+        {
+            NombreCompleto = PrimerNombre + " " + ApellidoPaterno;
+        }
     }
 }

@@ -1,22 +1,30 @@
-﻿using System;
-using System.Collections.Generic;
+using System;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ProyectoServicioTuristico.Data;
 using ProyectoServicioTuristico.Models;
+using ProyectoServicioTuristico.ViewModels;
 
 namespace ProyectoServicioTuristico.Controllers
 {
     public class RutasController : Controller
     {
         private readonly ApplicationDbContext _context;
-        private readonly Guia _guia;
-        public RutasController(ApplicationDbContext context)
+        private readonly UserManager<IdentityUser> _userManager;
+        private readonly IWebHostEnvironment _hostEnvironment;
+        public RutasController(ApplicationDbContext context, UserManager<IdentityUser> userManager, IWebHostEnvironment hostEnvironment)
         {
             _context = context;
+            _userManager = userManager;
+            _hostEnvironment = hostEnvironment;
+
         }
 
         // GET: Rutas
@@ -45,25 +53,25 @@ namespace ProyectoServicioTuristico.Controllers
 
             return View(ruta);
         }
-
+        [Authorize(Roles = "Guia")]
         // GET: Rutas/Create
         public IActionResult Create()
         {
             ViewData["ClasificacionRutaId"] = new SelectList(_context.ClasificacionRutas, "ClasificacionRutaId", "Nombre");
-            ViewData["GuiaId"] = new SelectList(_context.Guias, "GuiaId", "Identidad");
             return View();
         }
 
         // POST: Rutas/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = "Guia")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create( Ruta rutamodel)
+        public async Task<IActionResult> Create(Ruta rutamodel)
         {
             if (ModelState.IsValid)
             {
-                var idguia = _guia.GuiaId;
+                var guiaId = await ObtenerGuiaId();
                 Ruta ruta = new Ruta
                 {
                     Nombre = rutamodel.Nombre,
@@ -71,20 +79,28 @@ namespace ProyectoServicioTuristico.Controllers
                     PuntoLLegada=rutamodel.PuntoLLegada,
                     Precio=rutamodel.Precio,
                     DescripcionServicios=rutamodel.DescripcionServicios,
-                    GuiaId=idguia,
+                    GuiaId=guiaId,
                     ClasificacionRutaId=rutamodel.ClasificacionRutaId
                 };
                 
                 
                 _context.Add(ruta);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Create", "FotografiaRutas");
             }
             ViewData["ClasificacionRutaId"] = new SelectList(_context.ClasificacionRutas, "ClasificacionRutaId", "Nombre", rutamodel.ClasificacionRutaId);
             //ViewData["GuiaId"] = new SelectList(_context.Guias, "GuiaId", "Identidad", rutamodel.GuiaId);
             return View();
         }
 
+        private async Task<int> ObtenerGuiaId()
+        {
+            var user = await _userManager.GetUserAsync(User);
+            var guia = await _context.Guias
+                .FirstOrDefaultAsync(m => m.Identidad == user.Email);
+            return guia.GuiaId;
+        }
+        [Authorize(Roles = "Guia")]
         // GET: Rutas/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
@@ -106,6 +122,7 @@ namespace ProyectoServicioTuristico.Controllers
         // POST: Rutas/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [Authorize(Roles = "Guia")]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("RutaId,Nombre,PuntoPartida,PuntoLLegada,Precio,DescripcionServicios,GuiaId,ClasificacionRutaId")] Ruta ruta)
@@ -133,13 +150,13 @@ namespace ProyectoServicioTuristico.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return Redirect($"https://localhost:44334/Guias/Details/{ruta.GuiaId}");
             }
             ViewData["ClasificacionRutaId"] = new SelectList(_context.ClasificacionRutas, "ClasificacionRutaId", "Nombre", ruta.ClasificacionRutaId);
             ViewData["GuiaId"] = new SelectList(_context.Guias, "GuiaId", "ApellidoPaterno", ruta.GuiaId);
             return View(ruta);
         }
-
+        [Authorize(Roles = "Guia")]
         // GET: Rutas/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
@@ -159,7 +176,7 @@ namespace ProyectoServicioTuristico.Controllers
 
             return View(ruta);
         }
-
+        [Authorize(Roles = "Guia")]
         // POST: Rutas/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
@@ -168,7 +185,7 @@ namespace ProyectoServicioTuristico.Controllers
             var ruta = await _context.Rutas.FindAsync(id);
             _context.Rutas.Remove(ruta);
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return Redirect($"https://localhost:44334/Guias/Details/{ruta.GuiaId}");
         }
 
         private bool RutaExists(int id)

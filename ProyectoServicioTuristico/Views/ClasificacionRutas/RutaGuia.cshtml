@@ -1,0 +1,161 @@
+@model ProyectoServicioTuristico.Models.Ruta
+
+@{
+    ViewBag.Title = "RutaGuia";
+    Layout = "_Layout";
+}
+
+<h2 class="text-black text-center">Detalles de la ruta y el Guía</h2>
+<hr/>
+
+<a asp-action="Details" asp-route-id="@Model.ClasificacionRutaId" class="btn btn-outline-secondary" >Lista Rutas</a>
+
+<br/>
+<hr />
+<div>
+    <div class="card">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-4">
+                    <div class="thumbnail" style="align-content: center">
+                        <a href="~/images/guias/@Model.Guia.FotoPerfil">
+                            <img src="~/images/guias/@Model.Guia.FotoPerfil" alt="imagen no encntrada" height="200" width="200" class="rounded-circle" asp-append-version="true" />
+                        </a>
+                    </div>
+                    <br /><br />
+                    <h4 class="text-info">@Html.DisplayFor(model => model.Guia.NombreCompleto)</h4>
+                </div>
+                <div class="col-8">
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="col-sm-4 text-primary">
+                                @Html.DisplayNameFor(model => model.Guia.NombreCompleto)
+                            </div>
+                            <div class="col-sm-10">
+                                @Html.DisplayFor(model => model.Guia.NombreCompleto)
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="col-sm-4 text-primary">
+                                @Html.DisplayNameFor(model => model.Guia.Edad)
+                            </div>
+                            <div class="col-sm-10">
+                                @Html.DisplayFor(model => model.Guia.Edad)
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="col-sm-4 text-primary mt-2">
+                                @Html.DisplayNameFor(model => model.Guia.Sexo)
+                            </div>
+                            @if (Model.Guia.Sexo == 0)
+                            {
+                                <div class="col-sm-10">Femenino</div>
+                            }
+                            @if (Model.Guia.Sexo == 1)
+                            {
+                                <div class="col-sm-10">Masculino</div>
+                            }
+                        </div>
+                        <div class="col-6">
+                            <div class="col-sm-4 text-primary">
+                                @Html.DisplayNameFor(model => model.Guia.Identidad)
+                            </div>
+                            <div class="col-sm-10">
+                                @Html.DisplayFor(model => model.Guia.Identidad)
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="col-sm-12 text-primary mt-2">
+                                Contactos:
+                            </div>
+                            <div class="col-sm-4 text-primary">
+                                @Html.DisplayNameFor(model => model.Guia.Telefono)
+                            </div>
+                            <div class="col-sm-10">
+                                @Html.DisplayFor(model => model.Guia.Telefono)
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="col-sm-8 text-primary ">
+                                Idiomas
+                            </div>
+                            <div class="col-sm-8">
+                                <div class="row">
+                                    @{
+                                        foreach (var idiomas in Model.Guia.DetalleGuiaIdiomas)
+                                        {
+                                            <div class="col-sm-8">
+                                                <ul>
+                                                    @idiomas.Idioma.Nombre
+                                                </ul>
+                                            </div>
+                                        }
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<br /><br />
+            <div class="card">
+                <div class="card-header">
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="col-sm-12">
+                                @Html.DisplayFor(modelItem => Model.Nombre)
+                            </div>
+                            <div class="col-sm-4">
+                                @Html.DisplayNameFor(modelItem => Model.PuntoPartida)
+                            </div>
+                            <div class="col-sm-10">
+                                @Html.DisplayFor(modelItem => Model.PuntoPartida)
+                            </div>
+                            <div class="col-sm-4">
+                                @Html.DisplayNameFor(modelItem => Model.PuntoLLegada)
+                            </div>
+                            <div class="col-sm-10">
+                                @Html.DisplayFor(modelItem => Model.PuntoLLegada)
+                            </div>
+                            <div class="col-sm-4">
+                                @Html.DisplayNameFor(modelItem => Model.DescripcionServicios)
+                            </div>
+                            <div class="col-sm-10">
+                                @Html.DisplayFor(modelItem => Model.DescripcionServicios)
+                            </div>
+                            <div class="col-sm-10 mb-4">Precio de la ruta: <span class="badge badge-info">$ @Model.Precio</span></div>
+                            <div class="row">
+                                @if (Model.FotografiaRutas != null)
+                                {
+                                    @foreach (var photo in Model.FotografiaRutas)
+                                    {
+                                        <div class="col-md-4">
+                                            <div class="thumbnail">
+                                                <a href="~/images/rutas/@photo.Fotos">
+                                                    <img src="~/images/rutas/@photo.Fotos" alt="@photo.Ruta.Nombre" height="300" width="300">
+                                                    <div class="caption">
+                                                        <div class="col-sm-10 mt-2 mb-2">
+                                                            @Html.DisplayFor(modelItem => photo.DescripcionFoto)
+                                                        </div>
+                                                    </div>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    }
+                                   
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>

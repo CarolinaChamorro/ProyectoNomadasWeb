@@ -34,6 +34,7 @@
                 @Html.DisplayNameFor(model => model.ClasificacionRuta)
             </th>
             <th></th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -64,6 +65,9 @@
                 <a asp-action="Edit" asp-route-id="@item.RutaId">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.RutaId">Details</a> |
                 <a asp-action="Delete" asp-route-id="@item.RutaId">Delete</a>
+            </td>
+            <td>
+                <button class="btn btn-primary" onclick="location.href='@Url.Action("Create", "FotografiaRutas")'" value=@item.RutaId>Subir fotografias</button>
             </td>
         </tr>
 }

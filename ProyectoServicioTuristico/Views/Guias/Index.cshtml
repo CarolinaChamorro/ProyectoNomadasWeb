@@ -4,66 +4,64 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
-
-<p>
-    <a asp-action="Create">Crear un nuevo guia</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.NombreCompleto)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Edad)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Sexo)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Telefono)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Identidad)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
+<h1 class="text-black text-center">Perfiles de guías turísticos</h1>
+<div class="text-center mt-3 mb-3">
+        <a asp-controller="Roles" asp-action="Index" class="btn btn-outline-primary">Regresar</a>
+</div>
+    <table class="table table-hover table-responsive-sm">
+        <thead class="thead-dark">
             <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.NombreCompleto)
-                    <img src="~/images/guias/@item.FotoPerfil"
-                         class="rounded-circle"
-                         height="60" width="70"
-                         asp-append-version="true" />
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Edad)
-                </td>
-                @if (item.Sexo == 0)
-                {
-                    <td>Femenino</td>
-                }
-                @if (item.Sexo == 1)
-                {
-                    <td>Masculino</td>
-                }
-                <td>
-                    @Html.DisplayFor(modelItem => item.Telefono)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Identidad)
-                </td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.GuiaId">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.GuiaId">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.GuiaId">Delete</a>
-                </td>
+                <th>
+                    @Html.DisplayNameFor(model => model.NombreCompleto)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Edad)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Sexo)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Telefono)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Identidad)
+                </th>
+                <th></th>
             </tr>
-        }
-    </tbody>
-</table>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        <img src="~/images/guias/@item.FotoPerfil"
+                             class="rounded-circle"
+                             height="60" width="60"
+                             asp-append-version="true" />
+                        @Html.DisplayFor(modelItem => item.NombreCompleto)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Edad)
+                    </td>
+                    @if (item.Sexo == 0)
+                    {
+                        <td>Femenino</td>
+                    }
+                    @if (item.Sexo == 1)
+                    {
+                        <td>Masculino</td>
+                    }
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Telefono)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Identidad)
+                    </td>
+                    <td>
+                        <a asp-action="PerfilGuia" asp-route-id="@item.GuiaId" class="btn btn-primary">Detalles</a> 
+                        <a asp-action="Delete" asp-route-id="@item.GuiaId" class="btn btn-danger">Eliminar</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>

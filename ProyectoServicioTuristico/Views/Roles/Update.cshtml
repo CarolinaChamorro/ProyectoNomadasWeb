@@ -1,32 +1,37 @@
 ﻿@using ProyectoServicioTuristico.Models;
 @model EdicionRol
 
-<h1>Actualizar rol</h1>
-<a asp-action="Index" class="btn btn-secondary">Regresar</a>
+<h1 class="text-primary text-center">Actualizar rol</h1>
+<a asp-action="Index" class="btn btn-secondary mb-3 mr-2">Regresar</a>
+
 <div asp-validation-summary="All" class="text-danger"></div>
 <form asp-action="Update" method="post">
     <input type="hidden" name="RoleName" value="@Model.Rol.Name" />
     <input type="hidden" name="RoleId" value="@Model.Rol.Id" />
 
-    <h2>Añadir a @Model.Rol.Name</h2>
-    <table class="table table-sm table-bordered">
+    <h2 class="text-info text-center">Añadir a @Model.Rol.Name</h2>
+    <table class="table table--sm table-info table-bordered">
         @foreach (var usuario in Model.NoMiembros)
         {
             <tr>
                 <td>@usuario.UserName</td>
-                <td><input type="checkbox" value="@usuario.Id" name="AumentarIds" /></td>
+                <td>
+                    <input type="checkbox" class="form-check-input" value="@usuario.Id" name="AumentarIds" />
+                </td>
             </tr>
         }
     </table>
-    <h2>Remover de @Model.Rol.Name</h2>
-    <table class="table table-sm table-bordered">
+    <h2 class="text-danger text-center">Remover de @Model.Rol.Name</h2>
+    <table class="table table--sm table-danger table-bordered">
         @foreach (var usuario in Model.Miembros)
         {
             <tr>
                 <td>@usuario.UserName</td>
-                <td><input type="checkbox" value="@usuario.Id" name="BorrarIds" /></td>
+                <td>
+                <input type="checkbox" class="form-check-input" value="@usuario.Id" name="BorrarIds" />
+                </td>
             </tr>
         }
     </table>
-    <input type="submit" value="Grabar" class="btn btn-primary" />
+    <input type="submit" value="Actualizar" class="btn btn-primary mb-3 ml-2" />
 </form>

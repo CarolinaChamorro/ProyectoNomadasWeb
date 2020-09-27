@@ -7,8 +7,10 @@ namespace ProyectoServicioTuristico.Models
     {
         [Key]
         public int IdiomaId { get; set; }
+        [Required(ErrorMessage = "Ingrese el idioma")]
+        [Display(Name = "Idioma")]
         public string Nombre { get; set; }
         //guia
-        public List<DetalleGuiaIidioma> DetalleGuiaIidioma = new List<DetalleGuiaIidioma>();
+        public ICollection<DetalleGuiaIdioma> DetalleGuiaIdiomas { get; set; }
     }
 }

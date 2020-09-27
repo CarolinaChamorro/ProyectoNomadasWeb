@@ -3,24 +3,30 @@
 @inject UserManager<IdentityUser> UserManager
 
 <ul class="navbar-nav">
-@if (SignInManager.IsSignedIn(User))
-{
-    <li class="nav-item">
-        <a  class="nav-link js-scroll active text-info"  asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hola @User.Identity.Name!</a>
-    </li>
-    <li class="nav-item">
-        <form  class="form-inline text-info letra-nav" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
-            <button type="submit" class="nav-link js-scroll text-info boton-rectangular letra-nav">Cerrar sesión</button>
-        </form>
-    </li>
-}
-else
-{
-    <li class="nav-item">
-        <a class="nav-link js-scroll active text-info boton-rectangular letra-nav"  asp-area="Identity" asp-page="/Account/Register">Registrarse</a>
-    </li>
-    <li class="nav-item">
-        <a class="nav-link js-scroll active text-info boton-rectangular letra-nav"  asp-area="Identity" asp-page="/Account/Login">Iniciar sesión</a>
-    </li>
-}
+    @if (SignInManager.IsSignedIn(User))
+    {
+        <li class="nav-item">
+            <a class="nav-link js-scroll active text-info" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hola @User.Identity.Name!</a>
+        </li>
+        <li class="nav-item">
+            <form class="form-inline text-info letra-nav" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+                <button type="submit" class="nav-link js-scroll text-info boton-rectangular letra-nav">Cerrar sesión</button>
+            </form>
+        </li>
+    }
+    else
+    {
+        <li class="nav-item">
+            <a class="nav-link js-scroll active text-info boton-rectangular letra-nav" asp-area="Identity" asp-page="/Account/Register">Registrarse</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link js-scroll active text-info boton-rectangular letra-nav" asp-area="Identity" asp-page="/Account/Login">Iniciar sesión</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link js-scroll active text-info boton-rectangular letra-nav" asp-controller="ClasificacionRutas" asp-action="Index">Catálogo de lugares</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link js-scroll active text-info boton-rectangular letra-nav" asp-controller="Roles" asp-action="Index">Admin</a>
+        </li>
+    }
 </ul>

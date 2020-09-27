@@ -1,6 +1,15 @@
-﻿<h1>Crear rol</h1>
+﻿<h1 class="text-primary text-center mb-3">Crear rol</h1>
+<div class=" text-center">
+    <a asp-action="Index" class="btn btn-secondary mb-3">Regresar</a>
+</div>
 <form asp-action="Create" method="post">
-    <label for="nombre">Rol</label>
-    <input type="text" name="nombre" placeholder="Ingrese aquí el nombre de rol" class="form-control"/>
-    <input type="submit" value="Crear" class="btn btn-primary" />
+        <div class="card border-primary mb-3 text-center" style="width: 18rem; margin-left:auto; margin-right:auto;">
+            <div class="card-header">
+                <label for="nombre" class="text-info lead">Rol</label>
+                <input type="text" name="nombre" placeholder="Ingrese aquí el nombre de rol" class="form-control" />
+            </div>
+            <div class="card-body text-primary">
+                <input type="submit" value="Crear" class="btn btn-primary" />
+            </div>
+        </div>
 </form>

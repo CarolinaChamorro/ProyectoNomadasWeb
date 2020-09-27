@@ -1,0 +1,36 @@
+﻿@model ProyectoServicioTuristico.Models.Canton
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1 class="text-black text-center">Editar cantón</h1>
+<hr />
+<div class="row">
+    <div class="col-md-4" style="margin-right:auto; margin-left:auto;">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="CantonId" />
+            <div class="form-group">
+                <label asp-for="Nombre" class="control-label text-info"></label>
+                <input asp-for="Nombre" class="form-control" />
+                <span asp-validation-for="Nombre" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label text-info">Provincia</label>
+                <select asp-for="ProvinciaId" class="form-control" asp-items="ViewBag.ProvinciaId"></select>
+                <span asp-validation-for="ProvinciaId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Guardar" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+<div class="text-center">
+    <a asp-action="Index" class="btn btn-outline-primary mt-2">Regresar</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

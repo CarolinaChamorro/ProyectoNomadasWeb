@@ -1,0 +1,29 @@
+﻿@model ProyectoServicioTuristico.Models.Provincia
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h3 class="text-black text-center text-danger">¿Estás seguro que quieres eliminar este registro?</h3>
+<div>
+    <hr />
+    <div class="row ">
+        <div class="col-1" style="margin-right:auto; margin-left:auto;">
+            <dl class="row">
+                <dt class="col-sm-8 text-info">
+                    @Html.DisplayNameFor(model => model.Nombre)
+                </dt>
+                <dd class="col-sm-5">
+                    @Html.DisplayFor(model => model.Nombre)
+                </dd>
+            </dl>
+        </div>
+    </div>
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="ProvinciaId" />
+        <div class="text-center">
+            <a asp-action="Index" class="btn btn-outline-primary mr-2">Regresar</a>
+            <input type="submit" value="Eliminar" class="btn btn-danger ml-2" />
+        </div>
+    </form>
+</div>

@@ -15,7 +15,7 @@ namespace ProyectoServicioTuristico.Data.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.1.6")
+                .HasAnnotation("ProductVersion", "3.1.7")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -250,6 +250,12 @@ namespace ProyectoServicioTuristico.Data.Migrations
                     b.Property<int>("CantonId")
                         .HasColumnType("int");
 
+                    b.Property<string>("Descripcion")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Foto")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Nombre")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -266,7 +272,7 @@ namespace ProyectoServicioTuristico.Data.Migrations
                     b.ToTable("ClasificacionRutas");
                 });
 
-            modelBuilder.Entity("ProyectoServicioTuristico.Models.DetalleGuiaIidioma", b =>
+            modelBuilder.Entity("ProyectoServicioTuristico.Models.DetalleGuiaIdioma", b =>
                 {
                     b.Property<int>("DetalleGuiaIdiomaId")
                         .ValueGeneratedOnAdd()
@@ -285,45 +291,53 @@ namespace ProyectoServicioTuristico.Data.Migrations
 
                     b.HasIndex("IdiomaId");
 
-                    b.ToTable("DetalleGuiaIidiomas");
+                    b.ToTable("DetalleGuiaIdiomas");
                 });
 
-            modelBuilder.Entity("ProyectoServicioTuristico.Models.DetalleRutaFoto", b =>
-                {
-                    b.Property<int>("DetalleRutaFotoId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<int>("FotografiaId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("RutaId")
-                        .HasColumnType("int");
-
-                    b.HasKey("DetalleRutaFotoId");
-
-                    b.HasIndex("FotografiaId");
-
-                    b.HasIndex("RutaId");
-
-                    b.ToTable("DetalleRutaFotos");
-                });
-
-            modelBuilder.Entity("ProyectoServicioTuristico.Models.Fotografia", b =>
+            modelBuilder.Entity("ProyectoServicioTuristico.Models.FotografiaGuia", b =>
                 {
                     b.Property<int>("FotografiaId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("DescripcionFoto")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Fotos")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("GuiaId")
+                        .HasColumnType("int");
 
                     b.HasKey("FotografiaId");
 
-                    b.ToTable("Fotografias");
+                    b.HasIndex("GuiaId");
+
+                    b.ToTable("FotografiaGuias");
+                });
+
+            modelBuilder.Entity("ProyectoServicioTuristico.Models.FotografiaRuta", b =>
+                {
+                    b.Property<int>("FotografiaId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("DescripcionFoto")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Fotos")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("RutaId")
+                        .HasColumnType("int");
+
+                    b.HasKey("FotografiaId");
+
+                    b.HasIndex("RutaId");
+
+                    b.ToTable("FotografiaRutas");
                 });
 
             modelBuilder.Entity("ProyectoServicioTuristico.Models.Guia", b =>
@@ -341,6 +355,7 @@ namespace ProyectoServicioTuristico.Data.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Edad")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("FotoPerfil")
@@ -408,7 +423,7 @@ namespace ProyectoServicioTuristico.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("ClasificacinRutaId")
+                    b.Property<int>("ClasificacionRutaId")
                         .HasColumnType("int");
 
                     b.Property<string>("DescripcionServicios")
@@ -435,7 +450,7 @@ namespace ProyectoServicioTuristico.Data.Migrations
 
                     b.HasKey("RutaId");
 
-                    b.HasIndex("ClasificacinRutaId");
+                    b.HasIndex("ClasificacionRutaId");
 
                     b.HasIndex("GuiaId");
 
@@ -517,46 +532,47 @@ namespace ProyectoServicioTuristico.Data.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("ProyectoServicioTuristico.Models.DetalleGuiaIidioma", b =>
+            modelBuilder.Entity("ProyectoServicioTuristico.Models.DetalleGuiaIdioma", b =>
                 {
                     b.HasOne("ProyectoServicioTuristico.Models.Guia", "Guia")
-                        .WithMany()
+                        .WithMany("DetalleGuiaIdiomas")
                         .HasForeignKey("GuiaId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("ProyectoServicioTuristico.Models.Idioma", "Idioma")
-                        .WithMany()
+                        .WithMany("DetalleGuiaIdiomas")
                         .HasForeignKey("IdiomaId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("ProyectoServicioTuristico.Models.DetalleRutaFoto", b =>
+            modelBuilder.Entity("ProyectoServicioTuristico.Models.FotografiaGuia", b =>
                 {
-                    b.HasOne("ProyectoServicioTuristico.Models.Fotografia", "Fotografia")
-                        .WithMany()
-                        .HasForeignKey("FotografiaId")
+                    b.HasOne("ProyectoServicioTuristico.Models.Guia", "Guia")
+                        .WithMany("FotografiaGuias")
+                        .HasForeignKey("GuiaId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
 
+            modelBuilder.Entity("ProyectoServicioTuristico.Models.FotografiaRuta", b =>
+                {
                     b.HasOne("ProyectoServicioTuristico.Models.Ruta", "Ruta")
-                        .WithMany()
-                        .HasForeignKey("RutaId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .WithMany("FotografiaRutas")
+                        .HasForeignKey("RutaId");
                 });
 
             modelBuilder.Entity("ProyectoServicioTuristico.Models.Ruta", b =>
                 {
                     b.HasOne("ProyectoServicioTuristico.Models.ClasificacionRuta", "ClasificacionRuta")
                         .WithMany()
-                        .HasForeignKey("ClasificacinRutaId")
+                        .HasForeignKey("ClasificacionRutaId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("ProyectoServicioTuristico.Models.Guia", "Guia")
-                        .WithMany()
+                        .WithMany("Ruta")
                         .HasForeignKey("GuiaId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();

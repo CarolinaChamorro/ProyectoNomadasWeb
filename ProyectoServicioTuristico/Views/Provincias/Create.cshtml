@@ -1,0 +1,31 @@
+﻿@model ProyectoServicioTuristico.Models.Provincia
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1 class="text-black text-center text-info">Crear una nueva provincia</h1>
+<hr />
+<div class="row">
+    <div class="col-md-4" style="margin-right:auto; margin-left:auto;">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Nombre" class="control-label"></label>
+                <input asp-for="Nombre" class="form-control" />
+                <span asp-validation-for="Nombre" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Crear" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="text-center">
+    <a asp-action="Index" class="btn btn-outline-primary mt-2">Regresar</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

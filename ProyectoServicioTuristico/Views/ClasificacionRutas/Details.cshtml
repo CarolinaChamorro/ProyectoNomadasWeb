@@ -4,33 +4,68 @@
     ViewData["Title"] = "Details";
 }
 
-<h1>Details</h1>
+<h1 class="text-black text-center">Rutas que pertenecen a la clasificación @Model.Nombre</h1>
+<hr/>
 
-<div>
-    <h4>ClasificacionRuta</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Nombre)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Nombre)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Provincia)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Provincia.ProvinciaId)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Canton)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Canton.Nombre)
-        </dd>
-    </dl>
+<div class="row">
+    <div class="col-6">
+        <a class="btn btn-outline-secondary" asp-action="Index">Regresar a las clasificaciones</a>
+    </div>
+    <div class="col-6">
+        <a class="btn btn-outline-primary" asp-action="GuiasLista"> Ver lista de guias
+            <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-people-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-5.784 6A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1h4.216zM4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z"/>
+            </svg>
+        </a>
+    </div>
 </div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model.ClasificacionRutaId">Edit</a> |
-    <a asp-action="Index">Back to List</a>
-</div>
+<hr/>
+<!--Esta vista se mostrará cuando se seleccione una clasificacion trayendo todas las rutas que le pertenece a cada clasificacion-->
+@if (Model.Rutas != null)
+{
+    <div class="row">
+        <div class="col-md-12">
+            @foreach (var ruta in Model.Rutas)
+            {
+                <div class="card">
+                    <div class="card-header">
+                        <h6> Ruta creada por @ruta.Guia.NombreCompleto </h6>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-title text-black">@ruta.Nombre</div>
+                        <h6 class="text-primary">Punto de Partida: </h6>
+                        <div class="card-text">@ruta.PuntoPartida</div>
+                        <h6 class="text-primary">Punto de llegada: </h6>
+                        <div class="card-text">@ruta.PuntoLLegada</div>
+                        <h6 class="text-primary">Descripción de servicos integrados: </h6>
+                        <div class="col-8">
+                            <div class="card-text">@ruta.DescripcionServicios</div>
+                        </div>
+                        <h5 class="text-primary">Precio de la ruta: <span class="badge badge-info">$ @ruta.Precio</span></h5>
+                    </div>
+                    <div class="card-footer">
+                        <div class="row">
+                            @{
+                                @if (ruta.FotografiaRutas != null)
+                                {
+                                    foreach (var photo in ruta.FotografiaRutas)
+                                    {
+                                        <div class="col-4">
+                                            <a href="~/images/rutas/@photo.Fotos">
+                                                <img src="~/images/rutas/@photo.Fotos" alt="@ruta.Nombre" height="300" width="300"/>
+                                            </a>
+                                        </div>
+                                    }
+                                }
+                            }
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <a asp-action="RutaGuia" asp-route-id="@ruta.RutaId" class="btn btn-outline-secondary">Mas información..</a>
+                    </div>
+                </div>
+                <br/> <br/>
+            }
+        </div>
+    </div>
+}

@@ -1,0 +1,112 @@
+@model IEnumerable<ProyectoServicioTuristico.Models.Guia>
+
+@{
+    ViewBag.Title = "title";
+    Layout = "_Layout";
+}
+
+<h1 class="text-black text-center">Guias Turisticos</h1>
+<hr/>
+
+<a asp-action="Index" class="btn btn-outline-secondary mb-2">Regresar</a>
+
+<div class="row">
+    @foreach (var guia in Model)
+    {
+        <hr/>
+        <br/>
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-4">
+                            <div class="thumbnail" style="align-content: center">
+                                <a href="~/images/guias/@guia.FotoPerfil">
+                                    <img src="~/images/guias/@guia.FotoPerfil" alt="imagen no encntrada" height="200" width="200" class="rounded-circle" asp-append-version="true" />
+                                </a>
+                            </div>
+                            <br /><br />
+                            <h4 class="text-info">@Html.DisplayFor(model => guia.NombreCompleto)</h4>
+                        </div>
+                        <div class="col-8">
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="col-sm-4 text-primary">
+                                        @Html.DisplayNameFor(model => guia.NombreCompleto)
+                                    </div>
+                                    <div class="col-sm-10">
+                                        @Html.DisplayFor(model => guia.NombreCompleto)
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="col-sm-4 text-primary">
+                                        @Html.DisplayNameFor(model => guia.Edad)
+                                    </div>
+                                    <div class="col-sm-10">
+                                        @Html.DisplayFor(model => guia.Edad)
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="col-sm-4 text-primary mt-2">
+                                        @Html.DisplayNameFor(model => guia.Sexo)
+                                    </div>
+                                    @if (guia.Sexo == 0)
+                                    {
+                    <div class="col-sm-10">Femenino</div>}
+                                    @if (guia.Sexo == 1)
+                                    {
+                    <div class="col-sm-10">Masculino</div>}
+                                </div>
+                                <div class="col-6">
+                                    <div class="col-sm-4 text-primary">
+                                        @Html.DisplayNameFor(model => guia.Identidad)
+                                    </div>
+                                    <div class="col-sm-10">
+                                        @Html.DisplayFor(model => guia.Identidad)
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="col-sm-12 text-primary mt-2">
+                                        Contactos:
+                                    </div>
+                                    <div class="col-sm-4 text-primary">
+                                        @Html.DisplayNameFor(model => guia.Telefono)
+                                    </div>
+                                    <div class="col-sm-10">
+                                        @Html.DisplayFor(model => guia.Telefono)
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="col-sm-8 text-primary ">
+                                        Idiomas
+                                    </div>
+                                    <div class="col-sm-8">
+                                        <div class="row">
+                                            @{ foreach (var idiomas in guia.DetalleGuiaIdiomas)
+                                                {
+                                <div class="col-sm-8">
+                                    <ul>
+                                        @idiomas.Idioma.Nombre
+                                    </ul>
+                                </div> } }
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer">
+                <a asp-action="PerfilGuia" asp-route-id="@guia.GuiaId" class="btn btn-outline-secondary">Mas info...</a>
+            </div>
+        </div>
+    }
+</div>
+
+

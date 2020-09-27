@@ -1,86 +1,264 @@
-﻿@model ProyectoServicioTuristico.Models.Guia
+@model ProyectoServicioTuristico.Models.Guia
+
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Detalles";
 }
 
-<h1>Details</h1>
-
 <div>
-    <h4>Guia</h4>
+    <h1 class="text-black-50 text-center">Mi Perfil</h1>
     <hr />
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.PrimerNombre)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.PrimerNombre)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.SegundoNombre)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.SegundoNombre)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.ApellidoPaterno)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.ApellidoPaterno)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.ApellidoMaterno)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.ApellidoMaterno)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.NombreCompleto)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.NombreCompleto)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Edad)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Edad)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Sexo)
-        </dt>
-        @if (Model.Sexo == 0)
-        {
-            <dd>Femenino</dd>
-        }
-        @if (Model.Sexo == 1)
-        {
-            <dd>Masculino</dd>
-        }
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Telefono)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Telefono)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.FotoPerfil)
-        </dt>
-        <dd class="col-sm-10">
-            <img src="@("~/images/guias/"+Model.FotoPerfil)"
-                 class="rounded-circle"
-                 height="60" width="70"
-                 asp-append-version="true" />
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Identidad)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Identidad)
-        </dd>
-    </dl>
+    <div class="card">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-4">
+                    <div class="thumbnail" style="align-content: center">
+                        <a href="~/images/guias/@Model.FotoPerfil">
+                            <img src="~/images/guias/@Model.FotoPerfil" alt="imagen no encntrada" height="200" width="200" class="rounded-circle" asp-append-version="true" />
+                        </a>
+                    </div>
+                    <br /><br />
+                    <h4 class="text-info">@Html.DisplayFor(model => model.NombreCompleto)</h4>
+                    <a class="btn btn-outline-primary" asp-action="Edit" asp-route-id="@Model.GuiaId">
+                        Editar
+                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-pencil" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5L13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175l-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z" />
+                        </svg>
+                    </a>
+                </div>
+                <div class="col-8">
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="col-sm-4 text-primary">
+                                @Html.DisplayNameFor(model => model.NombreCompleto)
+                            </div>
+                            <div class="col-sm-10">
+                                @Html.DisplayFor(model => model.NombreCompleto)
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="col-sm-4 text-primary">
+                                @Html.DisplayNameFor(model => model.Edad)
+                            </div>
+                            <div class="col-sm-10">
+                                @Html.DisplayFor(model => model.Edad)
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="col-sm-4 text-primary mt-2">
+                                @Html.DisplayNameFor(model => model.Sexo)
+                            </div>
+                            @if (Model.Sexo == 0)
+                            {
+                                <div class="col-sm-10">Femenino</div>
+                            }
+                            @if (Model.Sexo == 1)
+                            {
+                                <div class="col-sm-10">Masculino</div>
+                            }
+                        </div>
+                        <div class="col-6">
+                            <div class="col-sm-4 text-primary">
+                                @Html.DisplayNameFor(model => model.Identidad)
+                            </div>
+                            <div class="col-sm-10">
+                                @Html.DisplayFor(model => model.Identidad)
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="col-sm-12 text-primary mt-2">
+                                Contactos:
+                            </div>
+                            <div class="col-sm-4 text-primary">
+                                @Html.DisplayNameFor(model => model.Telefono)
+                            </div>
+                            <div class="col-sm-10">
+                                @Html.DisplayFor(model => model.Telefono)
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="col-sm-8 text-primary ">
+                                Idiomas
+                            </div>
+                            <div class="col-sm-8">
+                                <div class="row">
+                                    @{
+                                        foreach (var idiomas in Model.DetalleGuiaIdiomas)
+                                        {
+                                            <div class="col-sm-8">
+                                                <ul>
+                                                    @idiomas.Idioma.Nombre
+                                                </ul>
+                                            </div>
+                                        }
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr />
+            <button class="btn btn-primary" onclick="location.href='@Url.Action("Create", "Rutas")'">Crear Ruta Nueva</button>
+            <hr />
+        </div>
+    </div>
 </div>
+<br />
+<hr />
+<div class="container">
+    <button type="button" class="btn btn-secondary" data-toggle="collapse" data-target="#bookPhotos">Galeria</button>
+    <br /> <br />
+    <div id="bookPhotos" class="collapse">
+        <div class="card">
+            <div class="card-header">
+                <h4>Galeria de @Model.NombreCompleto</h4>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-12">
+                        <button class="btn btn-success" onclick="location.href='@Url.Action("Create", "FotografiaGuias")'">
+                            Agregar Imagen
+                            <svg width="1.0625em" height="1em" viewBox="0 0 17 16" class="bi bi-image" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" d="M14.002 2h-12a1 1 0 0 0-1 1v9l2.646-2.354a.5.5 0 0 1 .63-.062l2.66 1.773 3.71-3.71a.5.5 0 0 1 .577-.094L15.002 9.5V3a1 1 0 0 0-1-1zm-12-1a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2h-12zm4 4.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z" />
+                            </svg>
+                        </button>
+                    </div>
+                    <br /><br />
+                    @if (Model.FotografiaGuias != null)
+                    {
+                        @foreach (var item in Model.FotografiaGuias)
+                        {
+                            <div class="col-md-4">
+                                <div class="thumbnail">
+                                    <a href="~/images/guias/book/@item.Fotos">
+                                        <img src="~/images/guias/book/@item.Fotos" alt="Imagen no encontrada" height="300" width="300">
+                                        <div class="caption">
+                                            <div class="col-sm-10">
+                                                @Html.DisplayFor(modelItem => item.DescripcionFoto)
+                                            </div>
+                                        </div>
+                                    </a>
+                                    <button class="btn btn-outline-danger" onclick="location.href='/FotografiaGuias/Delete/@item.FotografiaId'">
+                                        Eliminar
+                                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-trash-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                            <path fill-rule="evenodd" d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5a.5.5 0 0 0-1 0v7a.5.5 0 0 0 1 0v-7z" />
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                        }
+                    }
+                    else
+                    {
+                        <h6>
+                            No hay imagenes en la galeria
+                        </h6>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<hr />
+<br />
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.GuiaId">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    @if (Model.Rutas != null)
+    {
+        @foreach (var item in Model.Rutas)
+        {
+            <div class="card">
+                <div class="card-header">
+                    <h5>@Html.DisplayFor(modelItem => item.ClasificacionRuta.Nombre)</h5>
+                    <button class="btn btn-outline-primary" onclick="location.href='/Rutas/Edit/@item.RutaId'">
+                        Editar
+                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-pencil" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5L13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175l-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z" />
+                        </svg>
+                    </button>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="col-sm-12">
+                                @Html.DisplayFor(modelItem => item.Nombre)
+                            </div>
+                            <div class="col-sm-4">
+                                @Html.DisplayNameFor(modelItem => item.PuntoPartida)
+                            </div>
+                            <div class="col-sm-10">
+                                @Html.DisplayFor(modelItem => item.PuntoPartida)
+                            </div>
+                            <div class="col-sm-4">
+                                @Html.DisplayNameFor(modelItem => item.PuntoLLegada)
+                            </div>
+                            <div class="col-sm-10">
+                                @Html.DisplayFor(modelItem => item.PuntoLLegada)
+                            </div>
+                            <div class="col-sm-4">
+                                @Html.DisplayNameFor(modelItem => item.DescripcionServicios)
+                            </div>
+                            <div class="col-sm-10">
+                                @Html.DisplayFor(modelItem => item.DescripcionServicios)
+                            </div>
+                            <div class="col-sm-10 mb-4">Precio de la ruta: <span class="badge badge-info">$ @item.Precio</span></div>
+                            <div class="row">
+                                @if (item.FotografiaRutas != null)
+                                {
+                                    @foreach (var photo in item.FotografiaRutas)
+                                    {
+                                        <div class="col-md-4">
+                                            <div class="thumbnail">
+                                                <a href="~/images/rutas/@photo.Fotos">
+                                                    <img src="~/images/rutas/@photo.Fotos" alt="@photo.Ruta.Nombre" height="300" width="300">
+                                                    <div class="caption">
+                                                        <div class="col-sm-10 mt-2 mb-2">
+                                                            @Html.DisplayFor(modelItem => photo.DescripcionFoto)
+                                                        </div>
+                                                    </div>
+                                                </a>
+                                                <!--onclick="location.href='@Url.Action("Delete", "FotografiaRutas")'"-->
+                                                <button class="btn btn-primary" onclick="location.href='/FotografiaRutas/Delete/@photo.FotografiaId'">
+                                                    Eliminar
+                                                    <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-trash-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                        <path fill-rule="evenodd" d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5a.5.5 0 0 0-1 0v7a.5.5 0 0 0 1 0v-7z" />
+                                                    </svg>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    }
+                                    <br />
+                                    <div>
+                                        @if (item.FotografiaRutas.Count < 3)
+                                        {
+                                            <button class="btn btn-success" onclick="location.href='@Url.Action("Create", "FotografiaRutas")'">
+                                                <svg width="1.0625em" height="1em" viewBox="0 0 17 16" class="bi bi-image" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                    <path fill-rule="evenodd" d="M14.002 2h-12a1 1 0 0 0-1 1v9l2.646-2.354a.5.5 0 0 1 .63-.062l2.66 1.773 3.71-3.71a.5.5 0 0 1 .577-.094L15.002 9.5V3a1 1 0 0 0-1-1zm-12-1a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2h-12zm4 4.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z" />
+                                                </svg>
+                                            </button>
+                                        }
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        }
+    }
+    else
+    {
+        <p>
+            No existe rutas creadas
+        </p>
+    }
 </div>
+
+
+

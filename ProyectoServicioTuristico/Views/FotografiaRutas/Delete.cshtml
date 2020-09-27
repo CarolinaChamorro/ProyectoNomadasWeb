@@ -1,0 +1,47 @@
+@model FotografiaRuta
+
+@{
+    ViewBag.Title = "Eliminar";
+    Layout = "_Layout";
+}
+
+<div class="col-md-8 mx-auto py-4">
+    <div class="card">
+        <div class="card-header text-center">
+            <h3 class="text-black text-center text-danger">¿Estás seguro que quieres eliminar este registro?</h3>
+        </div>
+        <hr />
+        <div class="card-body">
+            <div class="row">
+                <div class="col-6">
+                    <div class="col-sm-10 text-primary">
+                        @Html.DisplayNameFor(model => model.Fotos)
+                    </div>
+                    <div class="col-sm-10">
+                        <img src="~/images/rutas/@Model.Fotos" class="rounded-circle"
+                             height="100" width="100"
+                             asp-append-version="true" />
+                    </div>
+                </div>
+                    <div class="col-6">
+                        <div class="col-sm-10 text-primary">
+                            @Html.DisplayNameFor(model => model.DescripcionFoto)
+                        </div>
+                        <div class="col-sm-10">
+                            @Html.DisplayFor(model => model.DescripcionFoto)
+                        </div>
+                        </div>
+                </div>
+                        <div class="text-center mb-2">
+                            <form asp-action="Delete">
+                                <input type="hidden" asp-for="FotografiaId" />
+                                <input type="submit" value="Eliminar" class="btn btn-danger" /> 
+                            </form>
+                        </div>
+                        <div class="text-center mt-2">
+                            <a href='javascript:history.go(-1)' class="btn btn-outline-primary">Regresar</a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>

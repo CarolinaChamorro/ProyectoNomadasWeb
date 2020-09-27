@@ -1,0 +1,39 @@
+﻿@model IEnumerable<ProyectoServicioTuristico.Models.Provincia>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1 class="text-black text-center">Catálogo de provincias</h1>
+<div class="text-center mt-3">
+    <a asp-controller="ClasificacionRutas" asp-action="Lista" class="btn btn-outline-primary mr-2 mb-3">Regresar</a>
+    <a asp-action="Create" class="btn btn-outline-primary ml-2 mb-3">Crear provincia</a>
+    </div>
+    <div class="row ">
+        <div class="col-8" style="margin-right:auto; margin-left:auto;">
+            <table class="table table-responsive-sm text-center table-hover">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Nombre)
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Nombre)
+                            </td>
+                            <td>
+                                <a asp-action="Edit" asp-route-id="@item.ProvinciaId" class="btn btn-primary mr-2">Editar</a>
+                                <a asp-action="Delete" asp-route-id="@item.ProvinciaId" class="btn btn-danger mr-2">Eliminar</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
